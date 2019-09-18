@@ -64,6 +64,8 @@ wg = {
         $('#top nav ul li a').bind('click', function (e) {
             e.preventDefault();
 
+            console.log('teste');
+
             var link = $(this).prop('class');
             var position = $('#' + link).offset();
 
