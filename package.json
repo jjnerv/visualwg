@@ -1,0 +1,33 @@
+{
+  "name": "visualwg",
+  "version": "1.0.0",
+  "description": "portfolio freela",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jjnerv/visualwg.git"
+  },
+  "keywords": [
+    "front",
+    "end",
+    "freela",
+    "portfolio",
+    "jquery",
+    "javascript",
+    "ajax",
+    "php"
+  ],
+  "author": "Everaldino Oliveira dos Santos",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jjnerv/visualwg/issues"
+  },
+  "homepage": "https://github.com/jjnerv/visualwg#readme",
+  "devDependencies": {
+    "webpack": "^4.40.2",
+    "webpack-cli": "^3.3.9"
+  }
+}
