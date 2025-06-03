@@ -264,6 +264,8 @@ p {
   height: 329px;
   overflow: hidden;
   border: 5px solid #fff;
+  float: right;
+
 }
 #about div.box_photo img {
   width: 329px;

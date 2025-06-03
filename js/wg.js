@@ -64,20 +64,20 @@ wg = {
         $('#top nav ul li a').bind('click', function (e) {
             e.preventDefault();
 
-            console.log('teste');
-
             var link = $(this).prop('class');
             var position = $('#' + link).offset();
 
-            $('body').animate({
-                scrollTop: (position.top - 150) + 'px'
+            console.log('position: ', position);
+
+            $('html,body').animate({
+                scrollTop: (position.top - 120) + 'px'
             }, '500');
         });
 
         $('.logo').bind('click', function (e) {
             e.preventDefault();
 
-            $('body').animate({
+            $('html,body').animate({
                 scrollTop: '0px'
             }, '500');
         });
