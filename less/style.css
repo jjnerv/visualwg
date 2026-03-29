@@ -406,6 +406,7 @@ p {
   float: left;
   border: 1px solid silver;
   border-radius: 5px;
+  color: #fff;
 }
 #contact form textarea:focus {
   border-color: #4f4f4f;
@@ -475,6 +476,9 @@ footer {
   top: -46px;
   position: relative;
   left: 109px;
+}
+.message_input{
+  color: white;
 }
 .scroll_top {
   background: url(../img/top.png) no-repeat;

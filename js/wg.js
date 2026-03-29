@@ -127,29 +127,12 @@ wg = {
                 , msg: mensagem
             };
 
-            // document.getElementById('send').addEventListener('submit', function(event) {
-                // event.preventDefault();
-
                 emailjs.sendForm('service_dlo1vho', 'template_x6i094d', this)
                 .then(() => {
                     console.log('SUCCESS!');
                 }, (error) => {
                     console.log('FAILED...', error);
                 });
-            // });
-
-            // $.ajax({
-            //     url: "from.php"
-            //     , type: "POST"
-            //     , data: {
-            //         mail: email
-            //         , msg: mensagem
-            //     }
-            // }).done(function (data) {
-            //     $('.shadow').fadeIn();
-            //     $('div.msg_contact').fadeIn().find('span').html(data);
-            //     return false;
-            // });
 
             $('form').find("input[type=text], textarea").val("");
         });
