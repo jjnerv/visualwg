@@ -477,9 +477,6 @@ footer {
   position: relative;
   left: 109px;
 }
-.message_input{
-  color: white;
-}
 .scroll_top {
   background: url(../img/top.png) no-repeat;
   padding: 28px;
