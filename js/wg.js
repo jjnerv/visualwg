@@ -95,9 +95,10 @@ wg = {
                 $('div.msg_contact').fadeOut();
             });
 
-            var nome = $('#nick').val()
+            var nome = $('#name').val()
                 , email = $('#email').val()
-                , mensagem = $('#subject').val()
+                , title = $('#title').val()
+                , mensagem = $('#message').val()
                 , msg = [];
 
             if (!/[a-zA-Z]/.test(nome)) {
@@ -105,6 +106,9 @@ wg = {
             } else
             if (!/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)) {
                 msg[0] = 'Preencha o email corretamente.';
+            } else
+            if (!/[a-zA-Z]/.test(title)) {
+                msg[0] = 'Preencha o assunto corretamente.';
             } else
             if (!/[a-zA-Z]/.test(mensagem)) {
                 msg[0] = 'Preencha a mensagem corretamente.';
@@ -118,18 +122,34 @@ wg = {
                 return false;
             }
 
-            $.ajax({
-                url: "from.php"
-                , type: "POST"
-                , data: {
-                    mail: email
-                    , msg: mensagem
-                }
-            }).done(function (data) {
-                $('.shadow').fadeIn();
-                $('div.msg_contact').fadeIn().find('span').html(data);
-                return false;
-            });
+            const data = {
+                mail: email
+                , msg: mensagem
+            };
+
+            // document.getElementById('send').addEventListener('submit', function(event) {
+                // event.preventDefault();
+
+                emailjs.sendForm('service_dlo1vho', 'template_x6i094d', this)
+                .then(() => {
+                    console.log('SUCCESS!');
+                }, (error) => {
+                    console.log('FAILED...', error);
+                });
+            // });
+
+            // $.ajax({
+            //     url: "from.php"
+            //     , type: "POST"
+            //     , data: {
+            //         mail: email
+            //         , msg: mensagem
+            //     }
+            // }).done(function (data) {
+            //     $('.shadow').fadeIn();
+            //     $('div.msg_contact').fadeIn().find('span').html(data);
+            //     return false;
+            // });
 
             $('form').find("input[type=text], textarea").val("");
         });
