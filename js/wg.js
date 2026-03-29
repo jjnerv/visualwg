@@ -122,17 +122,12 @@ wg = {
                 return false;
             }
 
-            const data = {
-                mail: email
-                , msg: mensagem
-            };
-
-                emailjs.sendForm('service_dlo1vho', 'template_x6i094d', this)
-                .then(() => {
-                    console.log('SUCCESS!');
-                }, (error) => {
-                    console.log('FAILED...', error);
-                });
+            emailjs.sendForm('service_dlo1vho', 'template_x6i094d', this)
+            .then(() => {
+                console.log('SUCCESS!');
+            }, (error) => {
+                console.log('FAILED...', error);
+            });
 
             $('form').find("input[type=text], textarea").val("");
         });
