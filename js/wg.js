@@ -88,7 +88,7 @@ wg = {
         $('form#send').submit(function (e) {
             e.preventDefault();
 
-            $('div.msg_validation').remove();
+            $('div.msg_validation').fadeOut();
 
             $('a.exit_contact').bind('click', function () {
                 $('.shadow').fadeOut();
@@ -115,22 +115,25 @@ wg = {
             }
 
             if (msg.length > 0) {
-                //$('.shadow').fadeIn();
-                //$(this).append('div.msg_validation').fadeIn().find('span').html(msg);
-                $(this).parent().append("<div class='msg_validation'></div>");
+                $('div.msg_validation').fadeIn().find('span').html(msg);
                 $('div.msg_validation').html(msg);
                 return false;
-            }
+            }            
 
             emailjs.sendForm('service_dlo1vho', 'template_x6i094d', this)
             .then(() => {
-                console.log('SUCCESS!');
+                msg[0] = 'Mensagem enviada com sucesso!';
+                $('div.msg_validation').fadeIn().find('span').html(msg);
+                $('div.msg_validation').html(msg);
             }, (error) => {
-                console.log('FAILED...', error);
+                msg[0] = 'Ops, parece que sua mensagem não foi enviada!';
+                $('div.msg_validation').fadeIn().find('span').html(msg);
+                $('div.msg_validation').html(msg);
             });
 
             $('form').find("input[type=text], textarea").val("");
         });
+
     },
 
     back_top: function () {

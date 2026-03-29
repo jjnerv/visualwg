@@ -450,15 +450,17 @@ footer {
   min-height: 100%;
   z-index: 9999999;
   opacity: 0.9;
+  color: #fff;
   display: none;
 }
 .msg_validation {
   background: red;
   position: relative;
-  top: -170px;
+  top: 0;
   padding: 20px;
   font-size: 20px;
   color: #fff;
+  display: none;
 }
 .msg_contact {
   background-color: red;
