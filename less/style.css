@@ -173,15 +173,16 @@ p {
   margin: 0 0 10px;
 }
 .header {
-  background: #fff;
-  position: fixed;
+  top: 0px;
   width: 100%;
+  z-index: 999;
+  position: fixed;
   padding: 30px 0px;
+  background: #fff;
   border-bottom: 1px solid silver;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px;
   -moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px;
   -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px;
-  z-index: 999;
 }
 .wrap {
   display: flex;
@@ -453,6 +454,22 @@ footer {
   width: 100%;
   padding: 50px 0px;
   text-align: center;
+  display: block;
+}
+footer p {
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+footer p a {
+  margin: 0 10px;
+}
+footer p a img{
+  max-width: 30px;
+  max-height: 30px;
+
 }
 .shadow {
   background: #000;
