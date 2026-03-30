@@ -251,6 +251,7 @@ p {
   margin-bottom: 100px;
   clear: both;
   display: block;
+  font-size: 1.125rem;
 }
 #about {
   position: relative;
@@ -343,6 +344,7 @@ p {
   width: auto;
   list-style: none;
   display: inline-block;
+  font-size: 1.125rem;
 }
 #jobs article ul.list_galery li {
   width: 100%;
