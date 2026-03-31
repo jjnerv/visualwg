@@ -34,8 +34,8 @@ wg = {
         $('#jobs article a.next').bind('click', function (e) {
             e.preventDefault();
 
-            var $indexEl = $(this).parent().index("article.box_gallery");
-
+            var $indexEl = $(this).parent().parent().index("article.box_gallery");
+            console.log('index: ', $indexEl);
             $('article.box_gallery:eq(' + $indexEl + ') a.prev').show('slow');
             $('ul.list_galery:eq(' + $indexEl + ') li:visible').next().show();
             $('ul.list_galery:eq(' + $indexEl + ') li:visible').prev().hide();
@@ -47,7 +47,7 @@ wg = {
         $('#jobs article a.prev').bind('click', function (e) {
             e.preventDefault();
 
-            var $indexEl = $(this).parent().index("article.box_gallery");
+            var $indexEl = $(this).parent().parent().index("article.box_gallery");
 
             $('article.box_gallery:eq(' + $indexEl + ') a.next').show('slow');
             $('ul.list_galery:eq(' + $indexEl + ') li:visible').prev().show();
