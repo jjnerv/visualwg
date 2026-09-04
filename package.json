@@ -4,6 +4,9 @@
   "description": "portfolio freela",
   "main": "index.js",
   "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -27,6 +30,7 @@
   },
   "homepage": "https://github.com/jjnerv/visualwg#readme",
   "devDependencies": {
+    "vite": "^8.2.2",
     "webpack": "^5.105.4",
     "webpack-cli": "^7.0.2"
   }
