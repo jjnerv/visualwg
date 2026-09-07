@@ -31,6 +31,7 @@
   "homepage": "https://github.com/jjnerv/visualwg#readme",
   "devDependencies": {
     "vite": "^8.2.2",
+    "vite-plugin-simple-html": "^1.1.0",
     "webpack": "^5.105.4",
     "webpack-cli": "^7.0.2"
   }
