@@ -153,6 +153,7 @@ wg = {
             e.preventDefault();
 
             const msgValidation = document.querySelector('div.msg_validation');
+            const spinner = document.getElementById('spinner');
             msgValidation.style.display = 'none';
 
             document.querySelectorAll('a.exit_contact').forEach(exit => {
@@ -162,6 +163,8 @@ wg = {
                     });
                 });
             });
+
+            spinner.style.display = 'block';
 
             const nome = document.querySelector('#name').value;
             const email = document.querySelector('#email').value;
@@ -180,6 +183,7 @@ wg = {
             }
 
             if (msg.length > 0) {
+                spinner.style.display = 'none';
                 msgValidation.style.display = 'block';
 
                 const span = msgValidation.querySelector('span');
@@ -193,6 +197,7 @@ wg = {
 
             emailjs.sendForm('service_dlo1vho', 'template_x6i094d', this)
                 .then(() => {
+                    spinner.style.display = 'none';
                     msg[0] = 'Mensagem enviada com sucesso!';
                     msgValidation.style.display = 'block';
 
@@ -203,6 +208,7 @@ wg = {
 
                     msgValidation.innerHTML = msg[0];
                 }, (error) => {
+                    spinner.style.display = 'none';
                     msg[0] = 'Ops, parece que sua mensagem não foi enviada!';
                     msgValidation.style.display = 'block';
 
