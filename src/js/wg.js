@@ -121,25 +121,33 @@ wg = {
         });
     }
     , nav: function () {
-        $('#top nav ul li a').bind('click', function (e) {
-            e.preventDefault();
+        document.querySelectorAll('#top nav ul li a').forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
 
-            var link = $(this).prop('class');
-            var position = $('#' + link).offset();
+                const className = this.className;
+                const target = document.getElementById(className);
 
-            console.log('position: ', position);
+                if (target) {
+                    const position = target.getBoundingClientRect().top + window.scrollY;
 
-            $('html,body').animate({
-                scrollTop: (position.top - 120) + 'px'
-            }, '500');
+                    window.scrollTo({
+                        top: position - 120,
+                        behavior: 'smooth'
+                    });
+                }
+            });
         });
 
-        $('.logo').bind('click', function (e) {
-            e.preventDefault();
+        document.querySelectorAll('.logo').forEach(logo => {
+            logo.addEventListener('click', function (e) {
+                e.preventDefault();
 
-            $('html,body').animate({
-                scrollTop: '0px'
-            }, '500');
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
         });
     },
 
