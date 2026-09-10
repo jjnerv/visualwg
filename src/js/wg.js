@@ -31,15 +31,12 @@ wg = {
         return this.count--;
     },
     reset: function () {
-        console.log('reset: ', this.count);
         this.count = 0;
     },
     list: function () {
         document.querySelectorAll('#jobs ul.list li a').forEach((link) => {
             link.addEventListener('click', (event) => {
                 event.preventDefault();
-
-                console.log('list');
 
                 const filter = link.id;
                 const articles = document.querySelectorAll('#jobs article');
@@ -103,7 +100,6 @@ wg = {
                 let cnt = 0;
                 i.forEach((item, index) => {
                     if (item.style.display === 'block') {
-                        console.log('index: ', index);
                         cnt = index;
                     }
                 });
@@ -155,8 +151,6 @@ wg = {
 
         document.querySelector('form#send').addEventListener('submit', function (e) {
             e.preventDefault();
-
-            console.log('form#send submit');
 
             const msgValidation = document.querySelector('div.msg_validation');
             msgValidation.style.display = 'none';
@@ -236,7 +230,6 @@ wg = {
                 setTimeout(() => {
                     scrollBtn.style.display = 'none';
                 }, 500);
-                console.log('scrollTop <= 100: ', scrollTop);
             } else {
                 scrollBtn.style.display = 'inline';
                 scrollBtn.style.transition = 'opacity 0.5s';
