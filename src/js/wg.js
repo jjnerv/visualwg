@@ -153,54 +153,77 @@ wg = {
 
     send: function () {
 
-        $('form#send').submit(function (e) {
+        document.querySelector('form#send').addEventListener('submit', function (e) {
             e.preventDefault();
 
-            $('div.msg_validation').fadeOut();
+            console.log('form#send submit');
 
-            $('a.exit_contact').bind('click', function () {
-                $('.shadow').fadeOut();
-                $('div.msg_contact').fadeOut();
+            const msgValidation = document.querySelector('div.msg_validation');
+            msgValidation.style.display = 'none'; // substitui fadeOut
+
+            // evento para fechar contato
+            document.querySelectorAll('a.exit_contact').forEach(exit => {
+                exit.addEventListener('click', function () {
+                    document.querySelectorAll('.shadow, div.msg_contact').forEach(el => {
+                        el.style.display = 'none'; // substitui fadeOut
+                    });
+                });
             });
 
-            var nome = $('#name').val()
-                , email = $('#email').val()
-                , title = $('#title').val()
-                , mensagem = $('#message').val()
-                , msg = [];
+            const nome = document.querySelector('#name').value;
+            const email = document.querySelector('#email').value;
+            const title = document.querySelector('#title').value;
+            const mensagem = document.querySelector('#message').value;
+            const msg = [];
 
             if (!/[a-zA-Z]/.test(nome)) {
                 msg[0] = 'Preencha o nome corretamente.';
-            } else
-            if (!/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)) {
+            } else if (!/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)) {
                 msg[0] = 'Preencha o email corretamente.';
-            } else
-            if (!/[a-zA-Z]/.test(title)) {
+            } else if (!/[a-zA-Z]/.test(title)) {
                 msg[0] = 'Preencha o assunto corretamente.';
-            } else
-            if (!/[a-zA-Z]/.test(mensagem)) {
+            } else if (!/[a-zA-Z]/.test(mensagem)) {
                 msg[0] = 'Preencha a mensagem corretamente.';
             }
 
             if (msg.length > 0) {
-                $('div.msg_validation').fadeIn().find('span').html(msg);
-                $('div.msg_validation').html(msg);
+                msgValidation.style.display = 'block'; // substitui fadeIn
+
+                const span = msgValidation.querySelector('span');
+                if (span) {
+                    span.innerHTML = msg[0];
+                }
+
+                msgValidation.innerHTML = msg[0];
                 return false;
-            }            
+            }
 
             emailjs.sendForm('service_dlo1vho', 'template_x6i094d', this)
-            .then(() => {
-                msg[0] = 'Mensagem enviada com sucesso!';
-                $('div.msg_validation').fadeIn().find('span').html(msg);
-                $('div.msg_validation').html(msg);
-            }, (error) => {
-                msg[0] = 'Ops, parece que sua mensagem não foi enviada!';
-                $('div.msg_validation').fadeIn().find('span').html(msg);
-                $('div.msg_validation').html(msg);
-            });
+                .then(() => {
+                    msg[0] = 'Mensagem enviada com sucesso!';
+                    msgValidation.style.display = 'block';
 
-            $('form').find("input[type=text], textarea").val("");
-        });
+                    const span = msgValidation.querySelector('span');
+                    if (span) {
+                        span.innerHTML = msg[0];
+                    }
+
+                    msgValidation.innerHTML = msg[0];
+                }, (error) => {
+                    msg[0] = 'Ops, parece que sua mensagem não foi enviada!';
+                    msgValidation.style.display = 'block';
+
+                    const span = msgValidation.querySelector('span');
+                    if (span) {
+                        span.innerHTML = msg[0];
+                    }
+
+                    msgValidation.innerHTML = msg[0];
+                });
+
+                // limpa os campos
+                this.querySelectorAll("input[type=text], textarea").forEach(el => el.value = "");
+            });
 
     },
 
