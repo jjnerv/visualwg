@@ -318,6 +318,19 @@ p {
 #jobs ul.list li a {
   color: #139083;
 }
+
+/* #jobs article {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+#jobs article.is-hidden {
+  opacity: 0;
+  transform: translateY(8px);
+  pointer-events: none;
+} */
+
 #jobs article {
   width: 100%;
   text-align: center;
@@ -372,6 +385,7 @@ p {
   left: -0.56%;
   display: none;
 }
+
 #contact {
   background: url('../img/bg_contact.jpg') top left / cover no-repeat;
   display: flex;

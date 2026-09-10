@@ -11,54 +11,114 @@ wg = {
         wg.send();
         wg.back_top();
     },
-
-    list: function () {
-        $('#jobs ul.list li a').bind('click', function (e) {
-            e.preventDefault();
-
-            var filter = $(this).prop('id');
-
-            if (filter !== "all") {
-                if ($('#jobs').find('article.' + filter).size() > 0) {
-                    $('#jobs article.' + filter).show('slow');
-                    $('#jobs article:not(.' + filter + ')').hide('slow');
-                } else {
-                    $('#jobs article:not(.' + filter + ')').hide('slow');
-                }
-            } else {
-                $('#jobs article').show('slow');
-            }
+    count: 0,
+    showAll: function () {
+        const articles = document.querySelectorAll('#jobs article');
+        articles.forEach((article) => {
+            article.style.display = 'block';
         });
+    },
+    hiddenAll: function () {
+        const articles = document.querySelectorAll('#jobs article');
+        articles.forEach((article) => {
+            article.style.display = 'none';
+        });
+    },
+    increment: function () {
+        return this.count++;
+    },
+    drecrement: function () {
+        return this.count--;
+    },
+    reset: function () {
+        console.log('reset: ', this.count);
+        this.count = 0;
+    },
+    list: function () {
+        document.querySelectorAll('#jobs ul.list li a').forEach((link) => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault();
+
+                console.log('list');
+
+                const filter = link.id;
+                const articles = document.querySelectorAll('#jobs article');
+
+                if (filter === 'all') {
+                    wg.showAll();
+                } else {
+                    wg.hiddenAll();                    
+                }
+
+                const matchingArticles = document.querySelectorAll(
+                    `#jobs article.${CSS.escape(filter)}`
+                );
+
+                matchingArticles.forEach((article) => {
+                    article.style.display = 'block';
+                });
+            });  
+        });        
     }
     , gallery: function () {
-        $('#jobs article a.next').bind('click', function (e) {
-            e.preventDefault();
+        document.querySelectorAll('#jobs article a.next').forEach(function (nextButton, index) {
+            nextButton.addEventListener('click', function (e) {
+                e.preventDefault();
 
-            var $indexEl = $(this).parent().parent().index("article.box_gallery");
-            console.log('index: ', $indexEl);
-            $('article.box_gallery:eq(' + $indexEl + ') a.prev').show('slow');
-            $('ul.list_galery:eq(' + $indexEl + ') li:visible').next().show();
-            $('ul.list_galery:eq(' + $indexEl + ') li:visible').prev().hide();
+                const btnNext = document.querySelectorAll('#jobs article a.next')[index];
+                const btnPrev = document.querySelectorAll('#jobs article a.prev')[index];
+                const reset = this.reset;
 
-            if ($('ul.list_galery:eq(' + $indexEl + ') li:last-child').is(':visible')) {
-                $(this).hide('fast');
-            }
+                btnPrev.style.display = 'block';
+
+                const i = document.querySelectorAll('#jobs ul.list_galery')[index].querySelectorAll('li');
+                let cnt = 0;
+                i.forEach((item, idx) => {
+                    if (item.style.display === 'block') {
+                        cnt = idx;
+                    }
+                });
+
+                let count = cnt;
+
+                i[count].nextElementSibling.style.display = 'block';
+                i[count].style.display = 'none';
+
+                if(count >= i.length - 2) {
+                    btnNext.style.display = 'none';
+                }
+
+            });
         });
-        $('#jobs article a.prev').bind('click', function (e) {
-            e.preventDefault();
+        document.querySelectorAll('#jobs article a.prev').forEach(function (prevButton, index) {
+            prevButton.addEventListener('click', function (e) {
+                e.preventDefault();
 
-            var $indexEl = $(this).parent().parent().index("article.box_gallery");
+                const btnNext = document.querySelectorAll('#jobs article a.next')[index];
+                const btnPrev = document.querySelectorAll('#jobs article a.prev')[index];
 
-            $('article.box_gallery:eq(' + $indexEl + ') a.next').show('slow');
-            $('ul.list_galery:eq(' + $indexEl + ') li:visible').prev().show();
-            $('ul.list_galery:eq(' + $indexEl + ') li:visible').next().hide();
+                btnNext.style.display = 'block';
 
-            if ($('ul.list_galery:eq(' + $indexEl + ') li:first-child').is(':visible')) {
-                $(this).hide('fast');
-            }
+                const i = document.querySelectorAll('#jobs ul.list_galery')[index].querySelectorAll('li');
+                let cnt = 0;
+                i.forEach((item, index) => {
+                    if (item.style.display === 'block') {
+                        console.log('index: ', index);
+                        cnt = index;
+                    }
+                });
+     
+                let count = cnt;
 
+                i[count].previousElementSibling.style.display = 'block';
+                i[count].style.display = 'none';
+
+                if(count <= 1) {
+                    btnPrev.style.display = 'none';
+                }
+
+            });
         });
-
     }
     , nav: function () {
         $('#top nav ul li a').bind('click', function (e) {
