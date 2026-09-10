@@ -244,7 +244,6 @@ wg = {
             }
         });
 
-        // Clique no botão para voltar ao topo
         document.querySelector('span.scroll_top').addEventListener('click', function (e) {
             e.preventDefault();
 
