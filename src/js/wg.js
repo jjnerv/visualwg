@@ -159,13 +159,12 @@ wg = {
             console.log('form#send submit');
 
             const msgValidation = document.querySelector('div.msg_validation');
-            msgValidation.style.display = 'none'; // substitui fadeOut
+            msgValidation.style.display = 'none';
 
-            // evento para fechar contato
             document.querySelectorAll('a.exit_contact').forEach(exit => {
                 exit.addEventListener('click', function () {
                     document.querySelectorAll('.shadow, div.msg_contact').forEach(el => {
-                        el.style.display = 'none'; // substitui fadeOut
+                        el.style.display = 'none';
                     });
                 });
             });
@@ -187,7 +186,7 @@ wg = {
             }
 
             if (msg.length > 0) {
-                msgValidation.style.display = 'block'; // substitui fadeIn
+                msgValidation.style.display = 'block';
 
                 const span = msgValidation.querySelector('span');
                 if (span) {
@@ -221,27 +220,38 @@ wg = {
                     msgValidation.innerHTML = msg[0];
                 });
 
-                // limpa os campos
                 this.querySelectorAll("input[type=text], textarea").forEach(el => el.value = "");
             });
 
     },
 
     back_top: function () {
-        $(document).scroll(function () {
+        document.addEventListener('scroll', function () {
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            const scrollBtn = document.querySelector('span.scroll_top');
 
-            if ($(document).scrollTop() <= 100) {
-                $('span.scroll_top').fadeOut('slow');
-            } else if ($(document).scrollTop() > 100) {
-                $('span.scroll_top').fadeIn('slow');
+            if (scrollTop <= 20) {
+                scrollBtn.style.transition = 'opacity 0.5s';
+                scrollBtn.style.opacity = '0';
+                setTimeout(() => {
+                    scrollBtn.style.display = 'none';
+                }, 500);
+                console.log('scrollTop <= 100: ', scrollTop);
+            } else {
+                scrollBtn.style.display = 'inline';
+                scrollBtn.style.transition = 'opacity 0.5s';
+                scrollBtn.style.opacity = '1';
             }
         });
 
-        $('span.scroll_top').bind('click', function () {
+        // Clique no botão para voltar ao topo
+        document.querySelector('span.scroll_top').addEventListener('click', function (e) {
+            e.preventDefault();
 
-            $("html, body").animate({
-                scrollTop: 0
-            }, '500');
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         });
     }
 };
